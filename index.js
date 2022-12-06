@@ -19,7 +19,7 @@ function playRound (playerSelection, computerSelection) {
         }
     else if ((playerSelection == 'rock' && computerSelection == 'scissors') || (playerSelection == 'paper' && computerSelection == 'rock') || (playerSelection == 'scissors' && computerSelection == 'paper'))
         { 
-            playerScore++;
+            playerScore++
             return 'You win!'            
         }   
         computerScore++;
