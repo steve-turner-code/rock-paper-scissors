@@ -6,37 +6,39 @@ let options = [
 
 let playerScore = 0;
 let computerScore = 0;
+const outputBox = document.querySelector('#output');
+console.log(outputBox);
 
-function getComputerChoice () {
-    let result = Math.floor(Math.random() * options.length);
-    return options[result];
-}
+const buttonOptions = document.querySelectorAll('button');
+buttonOptions.forEach(button => button.addEventListener('click', playRound))
 
-function playRound (playerSelection, computerSelection) {
-    if (playerSelection == computerSelection)
-        {
-            return 'Draw'
-        }
-    else if ((playerSelection == 'rock' && computerSelection == 'scissors') || (playerSelection == 'paper' && computerSelection == 'rock') || (playerSelection == 'scissors' && computerSelection == 'paper'))
-        { 
-            playerScore++
-            return 'You win!'            
-        }   
-        computerScore++;
-        return 'You lose!'
+
+
+function playRound (e) {
+    let playerSelection = this.innerHTML;
+    playerSelection = playerSelection.toLowerCase();
     
-}
 
-function getPlayerChoice () {
-    let choice = prompt('What do you choose? Scissors, paper or rock?');
-    choice = choice.toLowerCase();
-    return choice;
-}
+    let computerSelection = Math.floor(Math.random() * options.length);
+    computerSelection = options[computerSelection];
 
-function game () {
-    for (let i = 0; i < 5; i++) {
-        alert(playRound (getPlayerChoice(), getComputerChoice()) + ' your score is ' + playerScore); 
+    if (playerSelection == computerSelection)
+    {
+        outputBox.innerHTML = `It's a draw. The score is ${playerScore} to ${computerScore}.`
     }
+else if ((playerSelection == 'rock' && computerSelection == 'scissors') || (playerSelection == 'paper' && computerSelection == 'rock') || (playerSelection == 'scissors' && computerSelection == 'paper'))
+    { 
+        playerScore++
+        outputBox.innerHTML = `You win! The score is ${playerScore} to ${computerScore}.`
+            
+    }   
+    else {
+        computerScore++;
+    outputBox.innerHTML = `You lost. Aww. The score is ${playerScore} to ${computerScore}.`
+    }
+
+
 }
 
-game();
+
+
